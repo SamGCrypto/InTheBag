@@ -13,39 +13,39 @@ namespace InTheBag.Controllers
 
             if (time <= 6)
             {
-                ViewBag.Greeting = "It is too early to be up!";
+                HttpContext.Session.SetString("greet", "It is too early to be up!");
             }else if (time <= 12)
             {
-                ViewBag.Greeting = "Good Morning";
+                HttpContext.Session.SetString("greet", "Good Morning");
             }else if(time <= 18) {
-                ViewBag.Greeting = "Good Afternoon";
+                HttpContext.Session.SetString("greet", "Good Afternoon");
             }
             else
             {
-                ViewBag.Greeting = "Good evening";
+                HttpContext.Session.SetString("greet", "Good evening");
             }
             int route = 0;
             switch (day)
             {
                 case "Monday":
                 case "Tuesday":
-                    ViewData["dayMessage"] = "The work week just started! Stay focused, you have a lot to do this week!";
+                    HttpContext.Session.SetString("dayMsg", "The work week just started! Stay focused, you have a lot to do this week!");
                     route = 1;
                     break;
                 case "Wednesday":
-                    ViewData["dayMessage"] = "Halfway to the weekend!";
+                    HttpContext.Session.SetString("dayMsg", "Halfway to the weekend!");
                     route = 2;
                     break;
                 case "Thursday":
-                    ViewData["dayMessage"] = "Isn't it Friday somewhere!";
+                    HttpContext.Session.SetString("dayMsg", "Isn't it Friday somewhere!");
                     route = 3;
                     break;
                 case "Friday":
-                    ViewData["dayMessage"] = "Woohoo TGIF!";
+                    HttpContext.Session.SetString("dayMsg", "Woohoo TGIF!");
                     route = 4;
                     break;
                 default:
-                    ViewData["dayMessage"] = "Ah the weekend!";
+                    HttpContext.Session.SetString("dayMsg", "Ah the weekend!");
                     route = 5;
                     break;
             }
@@ -61,6 +61,11 @@ namespace InTheBag.Controllers
             {
                 return View();
             }
+        }
+        public IActionResult Weekday()
+        {
+            HttpContext.Session.SetString("greet", "Congratulations, the work week just started and you have been rerouted!");
+            return View();
         }
     }
 }
